@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, TextInput, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, TextInput, View } from 'react-native';
 import { StackNavigator} from 'react-navigation'
 
-// import Mapbox from '@mapbox/react-native-mapbox-gl';
+import Mapbox from '@mapbox/react-native-mapbox-gl';
+Mapbox.setAccessToken('pk.eyJ1Ijoic2V5ZmViIiwiYSI6ImNqbmg2bmd0dDA3YmUzcHI3ZDA4OW9vb3gifQ.nvQYS5L65MsINHCwMFmDsQ');
 // import IOSIcon from "react-native-vector-icons/Ionicons";
 // import DetailScreen from './detail';
 // import MainScreen from './main';
@@ -28,6 +29,12 @@ import { StackNavigator} from 'react-navigation'
 //     }
 // })
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+
 class PickupLocationSelectionScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -44,6 +51,12 @@ class PickupLocationSelectionScreen extends React.Component {
             onChangeText={(text) => this.setState({text})}
             value={this.state.text}
         />
+        <Mapbox.MapView
+            styleURL={Mapbox.StyleURL.Street}
+            zoomLevel={15}
+            centerCoordinate={[11.256, 43.770]}
+            style={styles.container}>
+        </Mapbox.MapView>
       </View>
     );
   }
@@ -64,5 +77,6 @@ const rentalStackNav = StackNavigator({
   },
 
 });
+
 
 export default rentalStackNav;
