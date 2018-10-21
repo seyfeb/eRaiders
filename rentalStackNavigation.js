@@ -329,15 +329,15 @@ class DirectPickupOverviewScreen extends React.Component {
 //         tmpMinutes = this.state.durationMinute + '';
 //         paddedDurationMinutes = tmpMinutes.length >= 2 ? tmpMinutes : new Array(2 - tmpMinutes.length + 1).join(0) + tmpMinutes;
 
-  paddedMinutes = '25';
-  paddedHour = '14';
+  let paddedMinutes = '25';
+  let paddedHour = '14';
     return (
       <View style={styles.container}>
         <Text style={{fontSize:20, height: 40, borderColor: 'gray', borderWidth: 0, fontWeight: 'bold'}}>Rental time</Text>
         <Text style={{height: 40, borderColor: 'gray', borderWidth: 0, fontWeight: 'bold'}}>{paddedHour}:{paddedMinutes}</Text>
         <Text style={{fontSize:20, height: 40, borderColor: 'gray', borderWidth: 0, fontWeight: 'bold'}}>Price per minute</Text>
         <Text style={{height: 80, borderColor: 'gray', borderWidth: 0, fontWeight: 'bold'}}>0.10€/min.</Text>
-        <Button onPress={() => this.props.navigation.navigate('Success', this.state)} title="Book board!"/>
+        <Button onPress={() => this.props.navigation.navigate('SuccessDirectPickup', this.state)} title="Book board!"/>
       </View>
     );
   }
@@ -443,77 +443,6 @@ class SuccessDirectPickupScreen extends React.Component {
         // this.state = { day: this.props.navigation.state.params.day };
         this.state = this.props.navigation.state.params;
         // console.warn(this.state)
-        this.state.remainingTime = '0';
-
-
-    
-    // setInterval(() => {
-    //     let remString = '';
-    //     let now = new Date();
-    //     // this.state.year+'-'+this.state.month+'-'+this.state.day+'T'+this.state.hour+':'+this.state.minute+':00'
-    //     let reservationDate = new Date();
-
-    //     console.warn(this.state);
-    //     reservationDate.setUTCFullYear(this.state.year);
-    //     reservationDate.setUTCMonth(this.state.month-1);
-    //     reservationDate.setUTCDate(this.state.day);
-    //     reservationDate.setUTCHours(this.state.hour);
-    //     reservationDate.setUTCMinutes(this.state.minute);
-    //     // console.warn(now);
-    //     console.warn(reservationDate);
-
-    //     let dateDifference = reservationDate - now;
-
-    //     if ( dateDifference <= 0 )
-    //     {
-    //         // remString = 'Board arrived. Have fun!';
-    //     }
-    //     else
-    //     {
-    //         // console.warn(now.toISOString());
-    //         // console.warn(reservationDate.toISOString());
-
-    //         // let remDays = Math.floor(dateDifference / (1000*60*60*24));
-    //         // // let remMinutes = Math.floor(dateDifference / (1000*60))- remDays*(1000*60*60*24)- remHours*(1000*60*60);
-    //         // // let remSeconds = Math.floor(dateDifference / 1000)- remDays*(1000*60*60*24)- remHours*(1000*60*60)- remMinutes*(1000*60);
-    //         // let remDays = Math.floor(dateDifference / (1000*60*60*24));
-    //         // let remHours = Math.floor(dateDifference / (1000*60*60)) - remDays*(1000*60*60);
-    //         // // let remHours = Math.floor(dateDifference / (1000*60*60));
-    //         // let remMinutes = Math.floor(dateDifference / (1000*60));
-    //         // let remSeconds = Math.floor(dateDifference / 1000);
-
-
-    //         // if (remDays > 0) {
-    //         //     remString = remDays + 'd ' + remHours + 'h';
-    //         //     console.warn('a');
-    //         // }
-    //         // else 
-    //         // {
-    //         //     if (remHours > 0) {
-    //         //         remString = remHours + 'h ' + remMinutes + 'min';
-    //         //     console.warn('b');
-    //         //     }
-    //         //     else
-    //         //     {
-    //         //         if (remMinutes > 0) {
-    //         //             remString = remMinutes + 'min ';
-    //         //     console.warn('c');
-    //         //         }
-    //         //         else
-    //         //         {
-    //         //             remString = 'Board arrived. Have fun!';
-    //         //     console.warn('d');
-    //         //         }
-    //         //     }
-    //         // }
-
-    //         // console.warn('days'+remDays+'h'+remHours+'min'+remMinutes);
-    //     }
-
-    //       this.setState(() => {
-    //         return { remainingTime: remString };
-    //       });
-    //     }, 2000);
     }
 
 
@@ -521,8 +450,8 @@ class SuccessDirectPickupScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={{height: 40, borderColor: 'gray', borderWidth: 0, fontWeight: 'bold'}}>Your board has successfully been reserved and will be waiting at the requested location.</Text>
+      <View style={[styles.container,{padding:5,paddingTop:35}]}>
+        <Text style={{fontWeight: 'bold', fontSize:20, textAlign:'center'}}>Your board has successfully been reserved and will be waiting at the requested location.</Text>
         {/*<Text style={{height: 40, borderColor: 'gray', borderWidth: 0, fontWeight: 'bold'}}>Your board arrives in</Text>
         <Text style={{textAlign:'center', height: 60, borderColor: 'gray', borderWidth: 0, fontSize: 40, fontWeight: 'bold'}}>{this.state.remainingTime}</Text>
         */}
@@ -570,7 +499,7 @@ const rentalStackNav = StackNavigator({
           title: "Success",
         }),
     },
-    Success: {
+    SuccessDirectPickup: {
         screen: SuccessDirectPickupScreen,
         navigationOptions: ({ navigation }) => ({
           title: "Success",
